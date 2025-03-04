@@ -6,10 +6,9 @@ import re
 from urllib.parse import unquote
 # 导入json模块
 import json
-# 导入格式化输出模块
-from pprint import pprint
 # 导入自动化模块
 from DrissionPage import ChromiumPage
+
 from config.headers_config import headers
 
 
@@ -33,7 +32,6 @@ for page in range(1, 5):
     for index in video_id_list:
         try:
             video_id = index['aweme_id']
-            """发送请求: 模拟浏览器对于url地址发送请求"""
 
             # url地址: 请求网址
             url = f'https://www.douyin.com/discover?modal_id={video_id}'

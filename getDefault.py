@@ -6,8 +6,6 @@ import re
 from urllib.parse import unquote
 # 导入json模块
 import json
-# 导入格式化输出模块
-from pprint import pprint
 # 导入自动化模块
 from DrissionPage import ChromiumPage
 
