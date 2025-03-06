@@ -47,7 +47,7 @@ def input_environment():
 
 url, pages = input_environment()
 # 设置输出文件
-file = open(f'data\\comment.csv', mode='w', encoding='utf-8', newline='')
+file = open(f'../data/comment.csv', mode='w', encoding='utf-8', newline='')
 csv_writer = csv.DictWriter(file, fieldnames=['用户id', '评论内容', '评论者昵称', '评论者ip地址'])
 csv_writer.writeheader()
 

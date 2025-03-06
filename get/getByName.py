@@ -109,9 +109,8 @@ for page in range(1, pages + 1):
                     print(video_url)
                     break  # 如果成功完成操作，跳出 while 循环，继续下一个 aweme_id
                 except Exception as e:
-                    video_id = aweme['aweme_info']['aweme_id']
-                    print(f"Error occurred for aweme_id {video_id}: {e}")
+                    print(f"Error occurred: {e}")
                     retry_count += 1  # 增加重试计数器
                     if retry_count >= max_retries:
-                        print(f"Max retries reached for aweme_id {video_id}. Skipping...")
+                        print(f"Max retries reached. Skipping...")
         dp.scroll.to_bottom()
