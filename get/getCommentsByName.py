@@ -10,7 +10,7 @@ import json
 # 导入自动化模块
 from DrissionPage import ChromiumPage
 # 导入所需工具以及配置
-from utils.tools import extract_aweme_ids, get_by_name_input, get_comments_by_name_input
+from utils.tools import extract_aweme_ids, get_comments_by_name_input
 import csv
 from config.headers_config import headers
 
@@ -28,7 +28,7 @@ dp.get(f'https://www.douyin.com/search/{keyword}')
 
 # 设置输出文件
 file = open(f'../data/user_ids.csv', mode='w', encoding='utf-8', newline='')
-csv_writer = csv.DictWriter(file, fieldnames=['视频id'])
+csv_writer = csv.DictWriter(file, fieldnames=['视频id', '视频链接'])
 csv_writer.writeheader()
 
 # 查找的视频id
@@ -55,7 +55,10 @@ for page in range(1, video_pages + 1):
 
 # 输出所有的视频 id 到 csv 文件
 for video_id in video_ids:
-    video_dict = {'视频id': video_id}
+    video_dict = {
+        '视频id': video_id,
+        '视频链接': f'https://www.douyin.com?modal_id={video_id}',
+    }
     csv_writer.writerow(video_dict)
 
 # 依次获取所有的视频评论
