@@ -9,35 +9,12 @@ import json
 # 导入格式化输出模块
 # 导入自动化模块
 from DrissionPage import ChromiumPage
-from utils.find_aweme import extract_aweme_ids
-
+# 导入所需工具以及配置
+from utils.tools import extract_aweme_ids, get_by_name_input
 from config.headers_config import headers
 
 
-def get_input():
-    # 输入关键字，确保不为空
-    while True:
-        find_keyword = input("请输入查找关键字（不能为空）：").strip()
-        if find_keyword:
-            break
-        else:
-            print("关键字不能为空，请重新输入！")
-
-    # 输入查找页数，确保为1到10之间的整数
-    while True:
-        try:
-            pages = int(input("请输入查找页数（1到10之间的整数）："))
-            if 1 <= pages <= 10:
-                break
-            else:
-                print("页数必须在1到10之间，请重新输入！")
-        except ValueError:
-            print("输入无效，请输入一个整数！")
-    print(f"查找关键字是：{find_keyword}，查找页数是：{pages}")
-    return find_keyword, pages
-
-
-keyword, pages = get_input()
+keyword, pages = get_by_name_input()
 # 打开浏览器
 dp = ChromiumPage().latest_tab
 
@@ -77,7 +54,7 @@ for page in range(1, pages + 1):
                     video_content = requests.get(url=video_url, headers=headers).content
 
                     # 数据保存
-                    with open('video\\' + title + aweme_id + '.mp4', mode='wb') as f:
+                    with open('../video/' + title + aweme_id + '.mp4', mode='wb') as f:
                         f.write(video_content)
                     print(title)
                     print(video_url)
@@ -103,7 +80,7 @@ for page in range(1, pages + 1):
                     video_title = re.sub(r'[\\/:*"<>|\n]', '', video_old_title)
                     video_id = aweme['aweme_info']['aweme_id']
                     video_content = requests.get(url=video_url, headers=headers).content
-                    with open('video\\' + video_title + video_id + '.mp4', mode='wb') as f:
+                    with open('../video/' + video_title + video_id + '.mp4', mode='wb') as f:
                         f.write(video_content)
                     print(video_title)
                     print(video_url)

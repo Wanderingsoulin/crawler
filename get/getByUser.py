@@ -10,16 +10,17 @@ import json
 from DrissionPage import ChromiumPage
 
 from config.headers_config import headers
+from utils.tools import get_by_url_input
 
-
+user_url, pages = get_by_url_input()
 # 打开浏览器
 dp = ChromiumPage()
 # 监听数据包
 dp.listen.start('/aweme/v1/web/aweme/post/')
 # 访问网站
-dp.get('https://www.douyin.com/user/MS4wLjABAAAAompXkPoYOGsA152dqYoytKycjIZ_aCCxHwGmLX5IsDM?from_tab_name=main')
+dp.get(user_url)
 # 构建循环翻页
-for page in range(1, 5):
+for page in range(1, pages+1):
     print(f'正在采集第{page}页的数据内容')
     # 等待数据包加载
     resp = dp.listen.wait()
@@ -55,7 +56,7 @@ for page in range(1, 5):
             # 对于视频链接发送请求+获取视频内容
             video_content = requests.get(url=video_url, headers=headers).content
             # 数据保存
-            with open('video\\' + title + video_id + '.mp4', mode='wb') as f:
+            with open('../video/' + title + video_id + '.mp4', mode='wb') as f:
                 # 写入数据
                 f.write(video_content)
             print(title)

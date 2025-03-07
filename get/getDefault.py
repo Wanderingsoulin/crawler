@@ -40,7 +40,7 @@ for awe in aweList:
         video_url = json_data['app']['videoDetail']['video']['bitRateList'][0]['playAddr'][0]['src']
         # 对于视频链接发送请求+获取视频内容
         video_content = requests.get(url=video_url, headers=headers).content
-        with open('video\\' + title + aweId + '.mp4', mode='wb') as f:
+        with open('./video/' + title + aweId + '.mp4', mode='wb') as f:
             # 写入数据
             f.write(video_content)
         print(title)

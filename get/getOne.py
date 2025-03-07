@@ -1,4 +1,6 @@
 # 导入数据请求模块 pip install requests
+import os
+
 import requests
 # 导入正则表达式模块 内置模块
 import re
@@ -8,7 +10,6 @@ from urllib.parse import unquote
 import json
 
 from config.headers_config import headers
-
 
 url = 'https://www.douyin.com/discover?modal_id=7474109141796031783'
 res = requests.get(url, headers=headers)
@@ -25,6 +26,6 @@ title = json_data['app']['videoDetail']['desc']
 # 对于视频链接发送请求+获取视频内容
 video_content = requests.get(url=video_url, headers=headers).content
 # 数据保存
-with open('video\\' + title + '.mp4', mode='wb') as f:
+with open('../video/' + title + '.mp4', mode='wb') as f:
     # 写入数据
     f.write(video_content)
