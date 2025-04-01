@@ -1,3 +1,4 @@
+from datetime import datetime
 # 对乱码 json 提取其中的关键字
 def extract_aweme_ids(response_text):
     """
@@ -55,14 +56,14 @@ def get_by_name_input():
         else:
             print("关键字不能为空，请重新输入！")
 
-    # 输入查找页数，确保为1到10之间的整数
+    # 输入查找页数，确保为1到20之间的整数
     while True:
         try:
-            pages = int(input("请输入查找页数（1到10之间的整数）："))
-            if 1 <= pages <= 10:
+            pages = int(input("请输入查找页数（1到20之间的整数）："))
+            if 1 <= pages <= 20:
                 break
             else:
-                print("页数必须在1到10之间，请重新输入！")
+                print("页数必须在1到20之间，请重新输入！")
         except ValueError:
             print("输入无效，请输入一个整数！")
     print(f"查找关键字是：{find_keyword}，查找页数是：{pages}")
@@ -126,3 +127,13 @@ def get_comments_by_name_input():
             print("输入无效，请输入一个整数！")
     print(f"查找关键字是：{find_keyword}，查找视频页数是：{find_video_pages}，查找评论页数是：{find_comments_pages}")
     return find_keyword, find_video_pages, find_comments_pages
+
+# 获取当前日期或时间，并以指定格式返回
+def get_current_date(format="%Y-%m-%d"):
+    # 获取当前时间
+    current_time = datetime.now()
+
+    # 格式化时间
+    formatted_time = current_time.strftime(format)
+
+    return formatted_time
